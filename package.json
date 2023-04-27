@@ -1,14 +1,14 @@
 {
-  "name": "neves",
-  "version": "1.0.0",
+  "name": "neves.js",
+  "version": "0.0.1",
   "description": "My personal collection of JavaScript/TypeScript wrapper/adapter classes and functions.",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "João Neves",
+  "license": "AGPL-3.0-only",
   "devDependencies": {
     "@types/node": "^18.16.0",
     "typescript": "^5.0.4"
