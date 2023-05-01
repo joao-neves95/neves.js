@@ -4,13 +4,19 @@
   "description": "My personal collection of JavaScript/TypeScript wrapper/adapter classes and functions.",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ts-mocha",
+    "compile": "tsc"
   },
   "keywords": [],
   "author": "João Neves",
   "license": "AGPL-3.0-only",
   "devDependencies": {
+    "@types/chai": "^4.3.4",
+    "@types/mocha": "^10.0.1",
     "@types/node": "^18.16.0",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "ts-mocha": "^10.0.0",
     "typescript": "^5.0.4"
   }
 }
