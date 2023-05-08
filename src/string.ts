@@ -16,6 +16,10 @@ export const isStrNullOrWhiteSpace = (value: string): boolean => {
     return isStrNullOrEmpty(value) || value.trim().length === 0;
 };
 
+export const countStrBytes = (value: string): number => {
+    return new TextEncoder().encode(value).length;
+};
+
 export const removeBom = (value: string) => {
     if (value.charCodeAt(0) === 0xfeff) {
         return value.slice(1);
