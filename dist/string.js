@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeBom = exports.countStrBytes = exports.isStrNullOrWhiteSpace = exports.isStrNullOrEmpty = exports.isStrNullOrUndefined = exports.emptyString = void 0;
+exports.removeBom = exports.countStrBytes = exports.strStartsWithAnyOf = exports.isStrNullOrWhiteSpace = exports.isStrNullOrEmpty = exports.isStrNullOrUndefined = exports.emptyString = void 0;
 exports.emptyString = "";
 const isStrNullOrUndefined = (value) => {
     if (typeof value !== "string") {
         return false;
     }
-    return value === null || value === undefined;
+    return value === undefined || value === null;
 };
 exports.isStrNullOrUndefined = isStrNullOrUndefined;
 const isStrNullOrEmpty = (value) => {
@@ -14,9 +14,18 @@ const isStrNullOrEmpty = (value) => {
 };
 exports.isStrNullOrEmpty = isStrNullOrEmpty;
 const isStrNullOrWhiteSpace = (value) => {
-    return (0, exports.isStrNullOrEmpty)(value) || value.trim().length === 0;
+    return (0, exports.isStrNullOrEmpty)(value) || (value === null || value === void 0 ? void 0 : value.trim().length) === 0;
 };
 exports.isStrNullOrWhiteSpace = isStrNullOrWhiteSpace;
+const strStartsWithAnyOf = (input, ...params) => {
+    for (let i = 0; i < params.length; ++i) {
+        if (input.startsWith(params[i])) {
+            return true;
+        }
+    }
+    return false;
+};
+exports.strStartsWithAnyOf = strStartsWithAnyOf;
 const countStrBytes = (value) => {
     return new TextEncoder().encode(value).length;
 };

@@ -1,19 +1,36 @@
 export const emptyString = "";
 
-export const isStrNullOrUndefined = (value: string): boolean => {
+export const isStrNullOrUndefined = (
+    value: string | undefined | null
+): boolean => {
     if (typeof value !== "string") {
         return false;
     }
 
-    return value === null || value === undefined;
+    return value === undefined || value === null;
 };
 
-export const isStrNullOrEmpty = (value: string): boolean => {
+export const isStrNullOrEmpty = (value: string | undefined | null): boolean => {
     return isStrNullOrUndefined(value) || value === emptyString;
 };
 
-export const isStrNullOrWhiteSpace = (value: string): boolean => {
-    return isStrNullOrEmpty(value) || value.trim().length === 0;
+export const isStrNullOrWhiteSpace = (
+    value: string | undefined | null
+): boolean => {
+    return isStrNullOrEmpty(value) || value?.trim().length === 0;
+};
+
+export const strStartsWithAnyOf = (
+    input: string,
+    ...params: string[]
+): boolean => {
+    for (let i = 0; i < params.length; ++i) {
+        if (input.startsWith(params[i])) {
+            return true;
+        }
+    }
+
+    return false;
 };
 
 export const countStrBytes = (value: string): number => {

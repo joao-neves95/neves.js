@@ -4,6 +4,7 @@ import {
     countStrBytes,
     isStrNullOrEmpty,
     isStrNullOrWhiteSpace,
+    strStartsWithAnyOf,
 } from "../src/string";
 
 import { should } from "chai";
@@ -24,8 +25,6 @@ describe("strings", function () {
             ];
 
             data.forEach((dataItem) => {
-                console.log(isStrNullOrEmpty(dataItem.input));
-
                 isStrNullOrEmpty(dataItem.input).should.equal(
                     dataItem.expected
                 );
@@ -46,6 +45,30 @@ describe("strings", function () {
             data.forEach((dataItem) => {
                 isStrNullOrWhiteSpace(dataItem.input).should.equal(
                     dataItem.expected
+                );
+            });
+        });
+    });
+
+    describe("strStartsWithAnyOf", function () {
+        it("specifies if a string starts with any of the input parameters", function () {
+            const inputStr = "foo";
+
+            const data: TestDataFrame<string, boolean> = [
+                // Tuple: input, expected
+                { input: " ", expected: false },
+                { input: "bar", expected: false },
+                { input: "foobar", expected: false },
+                { input: "fo", expected: true },
+                { input: "fo ", expected: false },
+                { input: "foo", expected: true },
+                { input: "foo ", expected: false },
+            ];
+
+            data.forEach((dataItem) => {
+                strStartsWithAnyOf(inputStr, dataItem.input).should.equal(
+                    dataItem.expected,
+                    JSON.stringify(dataItem)
                 );
             });
         });
