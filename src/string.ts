@@ -20,6 +20,10 @@ export const isStrNullOrWhiteSpace = (
     return isStrNullOrEmpty(value) || value?.trim().length === 0;
 };
 
+export const isStrNumeric = (value: string | undefined | null) => {
+    return !isStrNullOrWhiteSpace(value) && !isNaN(parseFloat(value!));
+};
+
 export const strStartsWithAnyOf = (
     input: string,
     ...params: string[]

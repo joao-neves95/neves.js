@@ -1,13 +1,12 @@
-import { TestDataFrame } from "./types";
-
 import {
     countStrBytes,
     isStrNullOrEmpty,
     isStrNullOrWhiteSpace,
+    isStrNumeric,
     strStartsWithAnyOf,
 } from "../src/string";
-
 import { should } from "chai";
+import { TestDataFrame } from "./types";
 
 describe("strings", function () {
     this.beforeAll(() => {
@@ -50,23 +49,39 @@ describe("strings", function () {
         });
     });
 
+    describe("isStrNumeric", function () {
+        it("specifies if a string is numeric", function () {
+            const data: TestDataFrame<string, boolean> = [
+                // Tuple: input, expected
+                { input: "123", expected: true },
+                { input: "1.23", expected: true },
+                { input: "", expected: false },
+                { input: "  ", expected: false },
+                { input: "abc", expected: false },
+            ];
+
+            data.forEach((dataItem) => {
+                isStrNumeric(dataItem.input).should.equal(dataItem.expected);
+            });
+        });
+    });
+
     describe("strStartsWithAnyOf", function () {
         it("specifies if a string starts with any of the input parameters", function () {
             const inputStr = "foo";
 
-            const data: TestDataFrame<string, boolean> = [
+            const data: TestDataFrame<string | string[], boolean> = [
                 // Tuple: input, expected
-                { input: " ", expected: false },
-                { input: "bar", expected: false },
-                { input: "foobar", expected: false },
                 { input: "fo", expected: true },
-                { input: "fo ", expected: false },
                 { input: "foo", expected: true },
-                { input: "foo ", expected: false },
+                {
+                    input: [" ", "bar", "foobar", "fo ", "foo "],
+                    expected: false,
+                },
             ];
 
             data.forEach((dataItem) => {
-                strStartsWithAnyOf(inputStr, dataItem.input).should.equal(
+                strStartsWithAnyOf(inputStr, ...dataItem.input).should.equal(
                     dataItem.expected,
                     JSON.stringify(dataItem)
                 );

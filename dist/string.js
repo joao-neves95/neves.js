@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeBom = exports.countStrBytes = exports.strStartsWithAnyOf = exports.isStrNullOrWhiteSpace = exports.isStrNullOrEmpty = exports.isStrNullOrUndefined = exports.emptyString = void 0;
+exports.removeBom = exports.countStrBytes = exports.strStartsWithAnyOf = exports.isStrNumeric = exports.isStrNullOrWhiteSpace = exports.isStrNullOrEmpty = exports.isStrNullOrUndefined = exports.emptyString = void 0;
 exports.emptyString = "";
 const isStrNullOrUndefined = (value) => {
     if (typeof value !== "string") {
@@ -17,6 +17,10 @@ const isStrNullOrWhiteSpace = (value) => {
     return (0, exports.isStrNullOrEmpty)(value) || (value === null || value === void 0 ? void 0 : value.trim().length) === 0;
 };
 exports.isStrNullOrWhiteSpace = isStrNullOrWhiteSpace;
+const isStrNumeric = (value) => {
+    return !(0, exports.isStrNullOrWhiteSpace)(value) && !isNaN(parseFloat(value));
+};
+exports.isStrNumeric = isStrNumeric;
 const strStartsWithAnyOf = (input, ...params) => {
     for (let i = 0; i < params.length; ++i) {
         if (input.startsWith(params[i])) {
