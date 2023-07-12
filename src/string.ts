@@ -38,6 +38,41 @@ export const strStartsWithAnyOf = (
     return false;
 };
 
+export const strEqualsAnyOf = (input: string, ...params: string[]): boolean => {
+    for (let i = 0; i < params.length; ++i) {
+        if (input === params[i]) {
+            return true;
+        }
+    }
+
+    return false;
+};
+
+/**
+ * Upper-cases the first letter of a string.
+ */
+export const toTitleCase = (input: string): string => {
+    if (isStrNullOrWhiteSpace(input)) {
+        return input;
+    }
+
+    return `${input[0].toUpperCase()}${input.slice(1).toLowerCase()}`;
+};
+
+/**
+ * Upper-cases the first letter of each word of a string.
+ */
+export const toTitleCaseSentence = (input: string): string => {
+    if (isStrNullOrWhiteSpace(input)) {
+        return input;
+    }
+
+    return input
+        .split(spaceString)
+        .map((word) => `${word[0].toUpperCase()}${word.slice(1).toLowerCase()}`)
+        .join(spaceString);
+};
+
 export const countStrBytes = (value: string): number => {
     return new TextEncoder().encode(value).length;
 };

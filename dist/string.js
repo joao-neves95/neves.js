@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeBom = exports.countStrBytes = exports.strStartsWithAnyOf = exports.isStrNumeric = exports.isStrNullOrWhiteSpace = exports.isStrNullOrEmpty = exports.isStrNullOrUndefined = exports.emptyString = void 0;
+exports.removeBom = exports.countStrBytes = exports.toTitleCaseSentence = exports.toTitleCase = exports.strEqualsAnyOf = exports.strStartsWithAnyOf = exports.isStrNumeric = exports.isStrNullOrWhiteSpace = exports.isStrNullOrEmpty = exports.isStrNullOrUndefined = exports.spaceString = exports.emptyString = void 0;
 exports.emptyString = "";
 exports.spaceString = " ";
 const isStrNullOrUndefined = (value) => {
@@ -31,6 +31,32 @@ const strStartsWithAnyOf = (input, ...params) => {
     return false;
 };
 exports.strStartsWithAnyOf = strStartsWithAnyOf;
+const strEqualsAnyOf = (input, ...params) => {
+    for (let i = 0; i < params.length; ++i) {
+        if (input === params[i]) {
+            return true;
+        }
+    }
+    return false;
+};
+exports.strEqualsAnyOf = strEqualsAnyOf;
+const toTitleCase = (input) => {
+    if ((0, exports.isStrNullOrWhiteSpace)(input)) {
+        return input;
+    }
+    return `${input[0].toUpperCase()}${input.slice(1).toLowerCase()}`;
+};
+exports.toTitleCase = toTitleCase;
+const toTitleCaseSentence = (input) => {
+    if ((0, exports.isStrNullOrWhiteSpace)(input)) {
+        return input;
+    }
+    return input
+        .split(exports.spaceString)
+        .map((word) => `${word[0].toUpperCase()}${word.slice(1).toLowerCase()}`)
+        .join(exports.spaceString);
+};
+exports.toTitleCaseSentence = toTitleCaseSentence;
 const countStrBytes = (value) => {
     return new TextEncoder().encode(value).length;
 };

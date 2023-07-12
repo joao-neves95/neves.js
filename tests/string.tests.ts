@@ -3,7 +3,10 @@ import {
     isStrNullOrEmpty,
     isStrNullOrWhiteSpace,
     isStrNumeric,
+    strEqualsAnyOf,
     strStartsWithAnyOf,
+    toTitleCase,
+    toTitleCaseSentence,
 } from "../src/string";
 import { should } from "chai";
 import { TestDataFrame } from "./types";
@@ -72,8 +75,8 @@ describe("strings", function () {
 
             const data: TestDataFrame<string | string[], boolean> = [
                 // Tuple: input, expected
-                { input: "fo", expected: true },
-                { input: "foo", expected: true },
+                { input: ["fo"], expected: true },
+                { input: ["foo"], expected: true },
                 {
                     input: [" ", "bar", "foobar", "fo ", "foo "],
                     expected: false,
@@ -82,6 +85,85 @@ describe("strings", function () {
 
             data.forEach((dataItem) => {
                 strStartsWithAnyOf(inputStr, ...dataItem.input).should.equal(
+                    dataItem.expected,
+                    JSON.stringify(dataItem)
+                );
+            });
+        });
+    });
+
+    describe("strEqualsAnyOf", function () {
+        it("specifies if a string equals to any of the input parameters", function () {
+            const inputStr = "foo";
+
+            const data: TestDataFrame<string[], boolean> = [
+                // Tuple: input, expected
+                { input: ["foo"], expected: true },
+                { input: ["bar"], expected: false },
+                {
+                    input: [" ", "bar", "foobar", "fo ", "foo "],
+                    expected: false,
+                },
+            ];
+
+            data.forEach((dataItem) => {
+                strEqualsAnyOf(inputStr, ...dataItem.input).should.equal(
+                    dataItem.expected,
+                    JSON.stringify(dataItem)
+                );
+            });
+
+            strEqualsAnyOf(inputStr, "foo").should.equal(true);
+        });
+    });
+
+    describe("toTitleCase", function () {
+        it("upper cases the first letter of a string", function () {
+            const data: TestDataFrame<string, string> = [
+                // Tuple: input, expected
+                {
+                    input: "eighty percent of success is showing up",
+                    expected: "Eighty percent of success is showing up",
+                },
+                {
+                    input: "dream",
+                    expected: "Dream",
+                },
+                {
+                    input: "BETTER",
+                    expected: "Better",
+                },
+            ];
+
+            data.forEach((dataItem) => {
+                toTitleCase(dataItem.input).should.equal(
+                    dataItem.expected,
+                    JSON.stringify(dataItem)
+                );
+            });
+        });
+    });
+
+    describe("toTitleCaseSentence", function () {
+        it("converts a sentence to title case", function () {
+            const data: TestDataFrame<string, string> = [
+                // Tuple: input, expected
+                {
+                    input: "Well done is better than well said",
+                    expected: "Well Done Is Better Than Well Said",
+                },
+                {
+                    input: "TRY IT AGAIN. FAIL AGAIN. FAIL BETTER",
+                    expected: "Try It Again. Fail Again. Fail Better",
+                },
+                {
+                    input: "the harder i work, the luckier i get",
+                    expected: "The Harder I Work, The Luckier I Get",
+                },
+            ];
+
+            data.forEach((dataItem) => {
+                toTitleCaseSentence(dataItem.input).should.equal(
                     dataItem.expected,
                     JSON.stringify(dataItem)
                 );
