@@ -1,4 +1,5 @@
 export declare const emptyString = "";
+export declare const spaceString = " ";
 export declare const isStrNullOrUndefined: (value: string | undefined | null) => boolean;
 export declare const isStrNullOrEmpty: (value: string | undefined | null) => boolean;
 export declare const isStrNullOrWhiteSpace: (value: string | undefined | null) => boolean;

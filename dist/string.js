@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.removeBom = exports.countStrBytes = exports.strStartsWithAnyOf = exports.isStrNumeric = exports.isStrNullOrWhiteSpace = exports.isStrNullOrEmpty = exports.isStrNullOrUndefined = exports.emptyString = void 0;
 exports.emptyString = "";
+exports.spaceString = " ";
 const isStrNullOrUndefined = (value) => {
     if (typeof value !== "string") {
         return false;
