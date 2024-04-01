@@ -51,7 +51,7 @@ export const strEqualsAnyOf = (input: string, ...params: string[]): boolean => {
 /**
  * Upper-cases the first letter of a string.
  */
-export const toTitleCase = (input: string): string => {
+export const toTitleCaseWord = (input: string): string => {
     if (isStrNullOrWhiteSpace(input)) {
         return input;
     }
@@ -69,7 +69,9 @@ export const toTitleCaseSentence = (input: string): string => {
 
     return input
         .split(spaceString)
-        .map((word) => `${word[0].toUpperCase()}${word.slice(1).toLowerCase()}`)
+        .map((word) =>
+            isStrNullOrWhiteSpace(word) ? word : toTitleCaseWord(word)
+        )
         .join(spaceString);
 };
 

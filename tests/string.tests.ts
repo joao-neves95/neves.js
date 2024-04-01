@@ -5,7 +5,7 @@ import {
     isStrNumeric,
     strEqualsAnyOf,
     strStartsWithAnyOf,
-    toTitleCase,
+    toTitleCaseWord,
     toTitleCaseSentence,
 } from "../src/string";
 import { should } from "chai";
@@ -136,7 +136,7 @@ describe("strings", function () {
             ];
 
             data.forEach((dataItem) => {
-                toTitleCase(dataItem.input).should.equal(
+                toTitleCaseWord(dataItem.input).should.equal(
                     dataItem.expected,
                     JSON.stringify(dataItem)
                 );
@@ -159,6 +159,10 @@ describe("strings", function () {
                 {
                     input: "the harder i work, the luckier i get",
                     expected: "The Harder I Work, The Luckier I Get",
+                },
+                {
+                    input: "does this          work?",
+                    expected: "Does This          Work?",
                 },
             ];
 

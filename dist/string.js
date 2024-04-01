@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeBom = exports.countStrBytes = exports.toTitleCaseSentence = exports.toTitleCase = exports.strEqualsAnyOf = exports.strStartsWithAnyOf = exports.isStrNumeric = exports.isStrNullOrWhiteSpace = exports.isStrNullOrEmpty = exports.isStrNullOrUndefined = exports.spaceString = exports.emptyString = void 0;
+exports.removeBom = exports.countStrBytes = exports.toTitleCaseSentence = exports.toTitleCaseWord = exports.strEqualsAnyOf = exports.strStartsWithAnyOf = exports.isStrNumeric = exports.isStrNullOrWhiteSpace = exports.isStrNullOrEmpty = exports.isStrNullOrUndefined = exports.spaceString = exports.emptyString = void 0;
 exports.emptyString = "";
 exports.spaceString = " ";
 const isStrNullOrUndefined = (value) => {
@@ -40,20 +40,20 @@ const strEqualsAnyOf = (input, ...params) => {
     return false;
 };
 exports.strEqualsAnyOf = strEqualsAnyOf;
-const toTitleCase = (input) => {
+const toTitleCaseWord = (input) => {
     if ((0, exports.isStrNullOrWhiteSpace)(input)) {
         return input;
     }
     return `${input[0].toUpperCase()}${input.slice(1).toLowerCase()}`;
 };
-exports.toTitleCase = toTitleCase;
+exports.toTitleCaseWord = toTitleCaseWord;
 const toTitleCaseSentence = (input) => {
     if ((0, exports.isStrNullOrWhiteSpace)(input)) {
         return input;
     }
     return input
         .split(exports.spaceString)
-        .map((word) => `${word[0].toUpperCase()}${word.slice(1).toLowerCase()}`)
+        .map((word) => (0, exports.isStrNullOrWhiteSpace)(word) ? word : (0, exports.toTitleCaseWord)(word))
         .join(exports.spaceString);
 };
 exports.toTitleCaseSentence = toTitleCaseSentence;
